@@ -1,5 +1,8 @@
 import { Box, Button, Center, FormControl, FormLabel, Heading, Input } from "@chakra-ui/react";
 import { Form } from "@remix-run/react";
+import ErrorBoundary_ from "~/components/ErrorBoundary";
+
+export const ErrorBoundary = ErrorBoundary_ ;
 
 export default function NewMagasin(){
     return (
