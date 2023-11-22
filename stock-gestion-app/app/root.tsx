@@ -1,5 +1,5 @@
-import { ChakraProvider, Box, Heading } from "@chakra-ui/react";
-import type { MetaFunction } from "@remix-run/node";
+import { ChakraProvider, Box } from "@chakra-ui/react";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,13 +7,31 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useCatch,
 } from "@remix-run/react";
+import { cssBundleHref } from "@remix-run/css-bundle";
 
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  viewport: "width=device-width,initial-scale=1",
-});
+import '@fontsource/poppins/index.css';
+import theme from "./theme";
+import RootNavBar from "./components/RootNavbar";
+import RootErrorBoundary from "./components/ErrorBoundary";
+
+export const meta: MetaFunction = () => {
+  return (
+    [
+      { charset: "utf-8" },
+      { viewport: "width=device-width,initial-scale=1" }
+    ]
+  )
+};
+
+export const links: LinksFunction = () => {
+  return [
+    ...(cssBundleHref
+      ? [{ rel: "stylesheet", href: cssBundleHref }]
+      : []),
+    // ...
+  ];
+};
 
 function Document({
   children,
@@ -44,39 +62,22 @@ export default function App() {
 
   return (
     <Document>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
+        <RootNavBar />
         <Outlet />
       </ChakraProvider>
     </Document>
   );
 }
 
-// How ChakraProvider should be used on CatchBoundary
-export function CatchBoundary() {
-  const caught = useCatch();
-
-  return (
-    <Document title={`${caught.status} ${caught.statusText}`}>
-      <ChakraProvider>
-        <Box>
-          <Heading as="h1" bg="purple.600">
-            [CatchBoundary]: {caught.status} {caught.statusText}
-          </Heading>
-        </Box>
-      </ChakraProvider>
-    </Document>
-  );
-}
-
 // How ChakraProvider should be used on ErrorBoundary
-export function ErrorBoundary({ error }: { error: Error }) {
+export function ErrorBoundary() {
   return (
     <Document title="Error!">
       <ChakraProvider>
+        <RootNavBar />
         <Box>
-          <Heading as="h1" bg="blue.500">
-            [ErrorBoundary]: There was an error: {error.message}
-          </Heading>
+          <RootErrorBoundary />
         </Box>
       </ChakraProvider>
     </Document>
