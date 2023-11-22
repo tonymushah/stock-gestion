@@ -7,8 +7,8 @@ export default function UniteMesureLayout() {
     return (
         <Flex >
             <VStack width={"200px"} spacing={"15px"}>
-                <Link color={pathname.startsWith("/unite-mesure/new") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./new"}>New</Link>
-                <Link color={pathname.startsWith("/unite-mesure/") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./"}>All</Link>
+                <Link color={pathname == ("/unite-mesure/new")  ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./new"}>New</Link>
+                <Link color={(pathname == "/unite-mesure/" || pathname == "/unite-mesure") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./"}>All</Link>
             </VStack>
             <Box flex={"1"}>
                 <Outlet/>

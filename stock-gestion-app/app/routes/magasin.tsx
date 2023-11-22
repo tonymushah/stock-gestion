@@ -7,8 +7,8 @@ export default function MangasinLayout() {
     return (
         <Flex >
             <VStack width={"200px"} spacing={"15px"}>
-                <Link color={pathname.startsWith("/magasin/new") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./new"}>New</Link>
-                <Link color={pathname.startsWith("/magasin/") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./"}>All</Link>
+                <Link color={pathname == ("/magasin/new") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./new"}>New</Link>
+                <Link color={(pathname == "/magasin/" || pathname == "/magasin") ? "red.500" : undefined} fontSize={"large"} as={RemixLink} to={"./"}>All</Link>
             </VStack>
             <Box flex={"1"}>
                 <Outlet/>

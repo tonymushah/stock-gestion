@@ -8,7 +8,7 @@ export default function ArticleLayout() {
         <Flex >
             <VStack width={"200px"} spacing={"15px"} border={""}>
                 <Link fontSize={"large"} color={pathname == "/article/new" ? "red.500" : undefined} as={RemixLink} to={"./new"}>New</Link>
-                <Link fontSize={"large"} color={pathname == "/article/" ? "red.500" : undefined} as={RemixLink} to={"./"}>All</Link>
+                <Link fontSize={"large"} color={(pathname == "/article/" || pathname == "/article") ? "red.500" : undefined} as={RemixLink} to={"./"}>All</Link>
             </VStack>
             <Box flex={"1"}>
                 <Outlet/>
